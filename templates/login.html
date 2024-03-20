@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #4F6F52;
+        }
+
+        form {
+            max-width: 500px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            
+        }
+
+        label {
+            display: none;
+        }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+            border: none;
+            border-bottom: 1px solid #333;
+            outline: none;
+        }
+
+        .g-recaptcha {
+            margin-bottom: 15px;
+        }
+
+        input[type="submit"] {
+            background-color: #3A4D39;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #739072;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+
+
+
+<body>
+    <h1>Login</h1>
+    <form method="POST">
+
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter username"required>
+        
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter Password"required>
+        
+        <!-- <label for="captcha">Captcha:</label>
+        <input type="text" id="captcha" name="captcha" required>
+        <img src="data:image/png;base64,{{ captcha }}" alt="Captcha Image"><br><br> -->
+
+        <div class="g-recaptcha" data-sitekey="6LddK48oAAAAANWq8b3ygub2QtxAMOUgte42SL3O"></div>
+
+        <input type="submit" value="Login">
+        <!-- <input type="submit" name="refresh_captcha" value="Refresh Captcha"> -->
+    </form>
+    
+    {% if error_message %}
+        <p>{{ error_message }}</p>
+    {% endif %}
+
+    <script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</body>
+</html>

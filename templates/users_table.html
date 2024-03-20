@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Users table</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #3A4D39;
+            margin-top: 20px;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #739072;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Users</h1>
+    <div>
+        {% include 'doctors_table.html' %}
+    </div>
+    <div>
+        {% include 'nurses_table.html' %}
+    </div>
+    <div>
+        {% include 'patients_table.html' %}
+    </div>
+</body>
+
+</html>

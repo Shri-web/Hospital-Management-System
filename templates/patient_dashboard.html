@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Patient Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #3A4D39;
+            margin-top: 20px;
+        }
+
+        div {
+            margin-bottom: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #739072;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Welcome to the Patient Dashboard</h1>
+    <div>
+        {% include 'nurses_table.html' %}
+    </div>
+    <div>
+        {% include 'doctors_table.html' %}
+    </div>
+    <p><a href="/logout">Logout</a></p>
+</body>
+
+</html>

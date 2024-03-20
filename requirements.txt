@@ -1,0 +1,6 @@
+Flask
+flask-session
+bcrypt
+requests
+pyotp
+python-dotenv

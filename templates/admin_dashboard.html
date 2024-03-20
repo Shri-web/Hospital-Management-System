@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Administrator Dashboard</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #ECE3CE;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        h1 {
+            color: #3A4D39;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            display: flex;
+        }
+
+        li {
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #739072;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Welcome to the Administrator Dashboard</h1>
+    <ul>
+        <li><a href="/user_details">View Users</a></li>
+        <li><a href="/admin">Manage Users</a></li>
+    </ul>
+    <p><a href="/logout">Logout</a></p>
+</body>
+</html>

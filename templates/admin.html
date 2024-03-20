@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            text-align: center;
+            margin: 0;
+            padding: 0;
+        }
+
+        h1 {
+            color: #3A4D39;
+            margin-top: 20px;
+        }
+
+        .section {
+            border: 1px solid #ddd; /* Inside border for each section */
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #fff; /* Background color for each section */
+            overflow: hidden; /* Fix overflow issue due to border */
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        li {
+            margin-right: 20px;
+        }
+
+        a {
+            text-decoration: none;
+            color: #739072;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        p {
+            margin-top: 20px;
+        }
+
+        /* Style for dropdowns */
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        select {
+            width: calc(100% - 950px); /* Adjusted width for the dropdown */
+            height: 25px; /* Adjusted height for the dropdown */
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+            font-size: 14px;
+            background-color: #fff;
+            color: #333;
+            cursor: pointer;
+        }
+
+        /* Style for submit button */
+        input[type="submit"] {
+            background-color: #3A4D39;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #739072;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Admin Dashboard - Manage Users</h1>
+
+    <!-- Add User Form -->
+    <div class="section">
+        <form method="POST">
+            <h2>Add User</h2>
+            <label for="new_username">Username:</label>
+            <input type="text" name="new_username" required>
+
+            <label for="new_password">Password:</label>
+            <input type="password" name="new_password" required>
+
+            <label for="role">Role:</label>
+            <select name="role" id="role" required>
+                <option value="Doctor">Doctor</option>
+                <option value="Nurse">Nurse</option>
+                <option value="Patient">Patient</option>
+            </select>
+
+            <br />
+
+            <label for="full_name">Full Name:</label>
+            <input type="text" name="full_name" value="" required>
+
+            <label for="contact_number">Contact Number:</label>
+            <input type="text" name="contact_number">
+
+            <!-- Role-specific fields -->
+
+            <div id="doctor-fields">
+                <label for="specialty">Specialty:</label>
+                <input type="text" name="specialty">
+            </div>
+
+            <div id="nurse-fields">
+                <label for="department">Department:</label>
+                <input type="text" name="department">
+            </div>
+
+            <div id="patient-fields">
+                <label for="date_of_birth">Date of Birth:</label>
+                <input type="date" name="date_of_birth">
+
+                <label for="address">Address:</label>
+                <input type="text" name="address">
+
+                <label for="medical_history">Medical History:</label>
+                <textarea name="medical_history"></textarea>
+            </div>
+
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    {% for message in messages %}
+                        {{ message }}
+                    {% endfor %}
+                {% endif %}
+            {% endwith %}
+            <br />
+
+            <input type="submit" value="Add User">
+        </form>
+    </div>
+
+    <!-- Assign Doctors Form -->
+    <div class="section">
+        <form action="/assign-doctor" method="POST">
+            <h2>Assign Doctors</h2>
+            <div class="dropdown-container">
+                <label for="doctor_id">Select Doctor:</label>
+                <select name="doctor_id" id="doctor" required>
+                    {% for doctor in doctors %}
+                        <option value="{{ doctor.id }}">{{ doctor.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="patient_id">Select Patient:</label>
+                <select name="patient_id" id="patient" required>
+                    {% for patient in patients %}
+                        <option value="{{ patient.id }}">{{ patient.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="submit" value="Assign Doctor">
+        </form>
+    </div>
+
+    <!-- Assign Nurses Form -->
+    <div class="section">
+        <form action="/assign-nurse" method="POST">
+            <h2>Assign Nurses</h2>
+            <div class="dropdown-container">
+                <label for="nurse_id">Select Nurse:</label>
+                <select name="nurse_id" id="nurse" required>
+                    {% for nurse in nurses %}
+                        <option value="{{ nurse.id }}">{{ nurse.name }}</option>
+                    {% endfor %}
+                </select>
+                <label for="patient_id">Select Patient:</label>
+                <select name="patient_id" id="patient" required>
+                    {% for patient in patients %}
+                        <option value="{{ patient.id }}">{{ patient.name }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            <input type="submit" value="Assign Nurse">
+        </form>
+    </div>
+
+    <!-- JavaScript to show/hide role-specific fields -->
+    <script>
+        const roleSelect = document.getElementById('role');
+        const doctorFields = document.getElementById('doctor-fields');
+        const nurseFields = document.getElementById('nurse-fields');
+        const patientFields = document.getElementById('patient-fields');
+
+        function changeForm() {
+            const selectedRole = roleSelect.value;
+            doctorFields.style.display = selectedRole === 'Doctor' ? 'block' : 'none';
+            nurseFields.style.display = selectedRole === 'Nurse' ? 'block' : 'none';
+            patientFields.style.display = selectedRole === 'Patient' ? 'block' : 'none';
+        }
+
+        changeForm()
+        roleSelect.addEventListener('change', changeForm);
+    </script>
+</body>
+
+</html>
