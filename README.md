@@ -35,4 +35,9 @@ The Hospital Management System is a web-based application developed using Flask,
 4. Access the application through the provided credentials in login_pass.xlsx.
 5. Explore the different functionalities based on your role.
 
-
+## Sample Images
+![login](/Pictures/login.png)
+![2fa](/Pictures/2fa.png)
+![admin_dashbord](/Pictures/admin_dashbord.png)
+![add_users](/Pictures/add_users.png)
+![list](/Pictures/list.png)
